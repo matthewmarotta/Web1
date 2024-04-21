@@ -1,0 +1,674 @@
+
+/*Notes for website:
+
+-shopping cart:
+-Shopping cart content should remain for 24 hours so the user can view the cart whenever within the period before the order is placed successfully
+-User can update the quantity of an item in the shopping cart
+
+-delivery details page:
+The page should show a form requesting user to provide recipient’s name, address, mobile number,
+and email address, all marked as required. [1 mark]
+- The address section should allow user to input the street, city/suburb, and then select the Australian
+states and territories (NSW, VIC, QLD, WA, SA, TAS, ACT, NT, Others). [1 mark]
+- The form’s inputs should be validated appropriately (e.g., an email address must follow certain
+formats). [2 mark]
+- The user cannot place an order if the inputs are not validated successfully. [1 mark]
+- The website should also re-check the availability (in stock or not) of all items in the order upon
+placing the order. [1 mark]
+- If any item becomes unavailable or insufficient for the order, user will be notified of the reason and
+redirected to the shopping cart. [2 mark]
+- Once validated, user can proceed to place the order (e.g., by clicking a “submit” button). [1 mark]
+
+-order confirmation page:
+Place an order for the items in the shopping cart and send a confirmation email to the user who placed the order
+
+Delivery details: where you can add name, address, mobile number, email address
+Once order is placed, cart will be cleared and a confirmation email will be sent to the customers email address, enclosing order details.
+You may create additional tables to store user, category, and order information.
+-User can proceed to give delivery details by clicking a “place an order” button when the shopping cart
+is non-empty.
+-If the order is placed successfully, quantities of items will be updated in the database. [1 mark].
+- Also, the shopping cart will be cleared [1 mark].
+- And user will receive a confirmation email enclosing the order details. You don’t have to actually
+send the email, but the page should pretend so and show order details. [1 mark]
+
+
+
+-search icon:
+Make search icon clickable
+Search for items using keywords.
+Show a grid view of items with name, image, unit, price, in stock status and add to cart button.
+
+-Add unit information e.g. kg, g, l, ml to items in grid, shopping cart and search bar (can be just 1)
+
+-fix links to items on carousel in the home page
+
+-remove availiability as its not needed Make it so when you add an item to cart or checkout 
+and make a purchase that the quantity of that item drops:
+CREATE TRIGGER update_Status AFTER UPDATE ON inventory_table FOR EACH ROW BEGIN IF 
+NEW.quantity = 0 THEN UPDATE inventory_table SET Status = FALSE WHERE id = NEW.id; END 
+IF; END;
+-Make it so you cant add an item to cart if it has no quantity in the database
+
+- An item should be highlighted or exhibit other visual efforts when the mouse is over it. [1 mark]
+- The “add to cart” button shows differently (e.g., in gray cooler) when the corresponding item is not in
+stock (or unavailable). [1 mark]
+- The “place an order” button shows differently (e.g., in gray colour) when the shopping cart is empty.
+[1 mark]
+- The “submit” button shows differently (e.g., in gray colour) when the ordered items cannot by
+validated. [1 mark]
+
+-Make it so if no items are in the cart that ghost items are there just to maintain form of the extended cart box without it collapsing
+-Make the custom cursor completely inline with a regular cursor before implementing (to avoid misalignment with finger tip and items when hovering)
+*/
+
+/* Universal classes */
+html { 
+    height: 100%; 
+}
+
+body {
+    height: 100%;
+}
+/*
+input {
+    cursor: url("/Users/User/Desktop/WebsiteProject/Images/pencil.png") 0 40, auto;
+}
+*/
+/*
+body {
+    cursor: url("/Users/User/Desktop/WebsiteProject/Images/mousepointer3.png"), auto;
+    }
+*/
+.text-body a {
+    color: black;
+}
+
+.spacer {
+    height: 20rem;
+    background-color: #ddd;
+}
+
+a {
+    text-decoration: none; 
+  }
+
+a:hover {
+       /* cursor: url("/Users/User/Desktop/WebsiteProject/Images/mousepointerhover.png"), auto;*/
+        text-decoration: none;
+        color: red;
+    }
+
+    /*.cursorhover {
+        cursor: url("/Users/User/Desktop/WebsiteProject/Images/mousepointerhover.png"), auto;
+    }*/
+
+/*Merch Page Classes/IDs*/
+
+
+.nav-icon-merch-page {
+    max-height: 100px;
+    margin: 0px 0px 0px 10px;
+}
+
+.top-nav-bar-merchpage {
+    height: 6rem;
+    top: 0;
+    position: sticky;
+    background: white;
+   
+    border-bottom: 0.188rem solid black;
+    width: 100%;
+    z-index: 2;  
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-control
+{
+    margin-top: 9px !important;
+    margin-left: 30px !important;
+    border: 1px solid black !important;
+    border-top-left-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.input-group-text {
+    background: black !important;
+    border: 1px solid black !important;
+    margin: 9px 10px 0px 0px !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-right-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+   /* cursor: url("/Users/User/Desktop/WebsiteProject/Images/mousepointerhover.png"), auto;*/
+}
+
+.search-box {
+    display: inline-flex;
+    width: 30%;
+}
+
+.fa-search {
+    color: white; 
+}
+
+/*
+.input-group-text:hover{
+    cursor: url("/Users/User/Desktop/WebsiteProject/Images/mousepointerhover.png"), auto;
+}
+
+
+.fa-solid:hover {
+    cursor: url("/Users/User/Desktop/WebsiteProject/Images/mousepointerhover.png"), auto;    
+}
+.fa-search:hover {
+    cursor: url("/Users/User/Desktop/WebsiteProject/Images/mousepointerhover.png"), auto; 
+}
+
+.fa:hover {
+    cursor: url("/Users/User/Desktop/WebsiteProject/Images/mousepointerhover.png"), auto;
+}
+
+.cart-wrapper:hover {
+    cursor: url("/Users/User/Desktop/WebsiteProject/Images/mousepointerhover.png"), auto;
+}
+
+.fas.fa-cart-shopping:hover {
+    cursor: url("/Users/User/Desktop/WebsiteProject/Images/mousepointerhover.png"), auto;
+}*/
+
+.fa-cart-shopping {
+    color: white;   
+    font-size: 1.2rem;
+    margin-right: 0.3rem;
+    
+}
+.cart-bar {
+    display: inline-flex;
+    float: right;
+    margin-left: none;
+    position: relative;
+}
+
+.expanded-cart {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    float: right;
+    background-color: #888;
+    margin-top: 0.2rem;
+    padding: 1rem;
+    max-height: 20rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    z-index: 1;
+    border: solid black 0.2rem;
+}
+
+.cart-grid {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.cart-item {
+display: flex;
+flex-direction: row;
+align-items: center;
+border: solid black 0.1rem;
+padding-right: 1rem;
+margin-bottom: 0.5rem;
+}  
+
+.cart-image {
+max-width: 100%;
+height: auto;
+border: solid grey 0.1rem;
+width: 4rem;
+margin: 1rem;
+}
+
+.cart-item-name {
+    text-align: left;
+    word-wrap: break-word;
+    border: solid grey 0.1rem;
+    margin: 1rem;
+}
+
+.cart-item-price {
+    text-align: left;
+    word-wrap: break-word;
+    border: solid grey 0.1rem;
+    margin: 1rem;
+}
+
+.cart-item-quantity {
+    text-align: left;
+    word-wrap: break-word;
+    border: solid grey 0.1rem;
+    margin: 1rem;
+}
+
+.remove-item:hover {
+color: red;
+}
+
+.total-checkout-container {
+display: flex;
+align-items: center;
+margin: 0.5rem 0rem 0.2rem 0rem;
+}
+
+.total {
+margin-bottom: 0 !important;
+}
+
+.checkout-button {
+width: 30%;
+}
+
+#checkout-button {
+   width: 30%;
+   margin-left:14.6rem;
+}
+
+/*for checkout button*/
+.disabled {
+    color: grey; /* You can adjust the color for disabled state */
+    pointer-events: none; /* Prevent clicking on disabled button */
+}
+
+/*for checkout button*/
+.enabled {
+    color: blue;
+    pointer-events: visible;
+}
+
+.clear-button {
+width: 20%;
+margin-left: auto;
+}
+
+.cart-bar ul { 
+    margin: 0rem 0rem 0rem 0rem;
+}
+
+.cart-bar ul li {
+    list-style-type: none;
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    background-color: black;
+    color: white;
+}
+
+.cart-bar ul li a {
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    /*cursor: url("/Users/User/Desktop/WebsiteProject/Images/mousepointerhover.png"), auto;*/
+}
+
+
+.cart-bar ul li .cart-wrapper:hover a,
+.cart-bar ul li .cart-wrapper:hover .fa-cart-shopping {
+    color: red;
+}
+
+#menu-btn, #close-btn {
+    display: none;
+    font-size: 2rem;
+    margin: 1rem;
+    color: black;
+
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #ddd;
+}
+
+
+/****start of side menu****/
+.side-menu {
+    height: 80%;
+    width: 15rem;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    background-color: #888;
+}
+
+
+.side-menu ul {
+    padding-left: 0%;
+}
+
+
+.side-menu ul li {
+    list-style-type: none;
+    font-weight: bold;
+    margin-top: 1rem;
+   /* cursor: url("/Users/User/Desktop/WebsiteProject/Images/mousepointerhover.png"), auto;*/
+}
+
+.fa-angle-right {
+    margin-top: 0.3rem;
+    margin-right: 1rem;
+    float: right;
+}
+
+.side-menu > ul > li {
+    margin: 1rem 0rem 0rem 1rem;
+}
+
+
+/*functionality to get one item to change colour when hovered and not every other one*/
+.side-menu ul li:hover {
+    color: red;
+}
+ul li ul li { 
+    color: black; 
+}
+
+.side-menu ul li ul li:hover {
+    color: rgb(0, 255, 149);
+}
+
+.side-menu ul li ul li ul {
+    background-color: white;
+    display: block;
+}
+/*end*/
+
+/*makes ul li ul disappear until ul li is hovered on*/
+.side-menu ul li ul {
+    display: none;
+}
+
+.side-menu ul li:hover > ul {
+    display: block;
+}
+/*end*/
+
+/*hides ul li ul li ul until clicked on*/
+.side-menu ul li ul li ul li{
+    display: none;
+}
+/*end*/
+
+.side-menu > ul > li > ul {  
+    z-index: 10;
+    margin-top: 1rem;
+    padding: 0.05rem 1rem 1rem 1rem;
+    margin: 1rem 0rem 0rem -1rem;
+    border: none;
+    background: #575757; 
+}
+
+
+/***end of side-menu***/
+
+
+.content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    background-color: #ddd;  
+    padding-bottom: 50rem;
+}
+
+/*carousel css*/
+.carousel-image {
+    width: 40rem !important;
+    height: 30rem !important;
+}
+
+.carousel-indicators {
+    z-index: 1 !important;
+}
+
+.carousel-indicators button {
+    background-color: black !important;
+}
+
+.carousel-indicators .active {
+    border-color: none; 
+}
+
+.carousel {
+    box-shadow: 0.2rem 0.2rem 0.4rem 0.2rem rgba(0,0,0,0.5) !important;
+}
+
+.slider 
+{
+    width: 40rem;
+    height: 30rem;
+    overflow: hidden;
+    border: none !important;
+}
+
+.Specials1-Merch-Page-Home {
+    display: block;
+    color: black;
+}
+
+.Specials1-Merch-Page-Home:hover {
+    display: block;
+    color: grey;
+}
+
+.Specials1-Merch-Page-Home:active {
+    display: block;
+    color: black;
+}
+
+.Specials2-Merch-Page-Home {
+    display: none;
+    color: black;
+}
+
+.Specials2-Merch-Page-Home:hover {
+    display: none;
+    color: grey;
+}
+
+.Specials2-Merch-Page-Home:active {
+    display: none;
+    color: black;
+}
+
+.Specials3-Merch-Page-Home {
+    display: none;
+    color: black;
+}
+
+.Specials3-Merch-Page-Home:hover {
+    display: none;
+    color: grey;
+}
+
+.Specials3-Merch-Page-Home:active {
+    display: none;
+    color: black;
+}
+/*end of carousel css*/
+
+.Merch-site-header {
+    align-items: center;
+    padding-bottom: 5rem;
+    padding-top: 1rem;
+}
+
+.category-site-header {
+    align-items: center;
+    padding-bottom: 5rem;
+    padding-top: 1rem;
+    display: none;
+}
+
+/*Grid layout for merch results pages*/
+.grid { /*Holds image and paragraph pairs*/
+    flex-wrap: wrap; /*allows items to wrap unto multiple lines if needed*/
+    justify-content: center; /*centers items along main axis within the container*/
+    display: none;
+}
+
+.grid-item {
+    background-color: rgb(190, 190, 190);
+    border: solid grey 0.1rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin: 4rem;
+}
+
+
+/*.grid p {
+    text-align: left;
+    border: none;
+    max-width: 25rem;
+    margin: 0 0 0rem 0;
+    word-wrap: break-word; allows words to wrap unto the next line
+}*/
+
+.grid-image {
+    padding-right: none;
+    border: solid grey 0.1rem;
+    border-radius: 0.5rem;
+    width: 25rem;
+    margin-bottom: 0rem;
+}
+
+.add-to-cart-button {
+    flex-wrap: wrap;
+    margin: 5rem 10rem 0 0rem;
+}
+/*end of grid layout for merch results pages*/
+
+
+/*Order confirmation page elements*/
+
+.form1 { 
+    border: solid black 0.2rem;
+    border-radius: 0.5rem;
+    margin: 4rem 2rem 0rem 0rem;
+    height: 45.9rem;
+}
+.customer-info-heading {
+    margin-left: 1rem;
+}
+.form {
+    display: inline-flex;
+    align-items: flex-start;  
+    flex-direction: column;
+    width: 100%;
+    margin-left: 1rem; 
+}
+/*End of order confirmation page elements*/
+
+
+
+/*Responsive elements*/
+@media only screen and (max-width: 61.25rem) {
+   
+    .slider 
+    {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .side-menu {
+        width: 40%;
+        z-index: 20;
+        top: 10.2rem;
+        position: fixed;
+        display:none;
+    }
+
+    .side-menu ul li ul {
+        top: 10.2rem;
+    }
+
+    .side-menu ul li:hover > ul {
+        margin-left: 30%;
+        top: 10.2rem;   
+    }
+
+    #menu-btn {
+        display:block;
+        font-size: 2rem;
+        margin: 1rem;
+        color: black;
+    }
+}
+
+@media only screen and (max-width: 33.95rem) {
+top-nav-bar-merchpage {
+    margin: 0rem 0rem -10rem 0rem;
+    width: 100%;
+}
+.cart-bar ul {
+    display: block;
+    margin-top: 11.8rem;   
+}
+
+.cart-bar ul li{
+    margin: 1rem 1rem 1rem 1rem;
+    width: 100%;
+}
+
+.cart-wrapper {
+    width: 100%    
+}
+
+/*.search-box {
+
+}*/
+
+}
+
+
+/*Gigs Page Classes*/
+
+.mt-h1-Gigs-page {
+    margin-top: 1.25rem !important; 
+}
+    
+.adbanner1 {
+    margin-top: 1.25rem !important;
+    width: 14rem !important;
+    height: 50rem !important;
+    background-color: black;
+    padding: none !important;
+    }
+    
+.adbanner2 {
+    margin-top: 1.25rem !important;
+    width: 14rem !important;
+    height: 50rem !important;
+    background-color: black;    
+    }
+
+  .nav-icon-gigs-page {
+    max-height: 100px;
+    margin: 0px 0px -10px 40px
+} 
+  
+  
+
+  
+
+  
+    
+    

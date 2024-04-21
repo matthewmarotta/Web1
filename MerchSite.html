@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="CSS4SWWEBSITE.css" type="text/css"> 
+    <title>My website</title>
+</head>
+<body>
+   
+    <div class="top-nav-bar-merchpage">
+        <i class="fa fa-bars" id="menu-btn" onclick="openmenu()"></i> 
+        <i class="fa fa-times" id="close-btn" onclick="closemenu()"></i>
+        <a href="http://localhost/WebsiteProject/MerchSite.html">
+            
+        <img class="nav-icon-merch-page" src="http://localhost/WebsiteProject/Images/LOGO STREET WORMS - RESIZED (NAV-ICON).png">
+        </a>
+
+    <div class="search-box">    
+    <input type="text" class="form-control" id="form">
+    <span class="input-group-text"><i class="fa fa-search"></i></span>
+    </div> 
+    
+    <div class="cart-bar">
+    <ul>
+    <li>
+        <div class="cart-wrapper" onclick="expandcart()"><i class="fas fa-cart-shopping"></i>
+            <a href="#" id="total2">  
+       $0.00
+        </div></a>
+    </li>
+    </ul>
+    </div>
+    
+    <div class="expanded-cart" id="cart-expanded">
+    <div class="cart-grid">  
+        <div class="cart-item">
+           <img src="" class="cart-image" id="cart-image">
+           <p class="cart-item-name" id="cart-item-name"></p>
+           <p class="cart-item-price" id="item-price"></p>
+           <p class="cart-item-quantity" id="item-quantity"></p>
+        </div>
+        <h2>Your cart is empty!</h2>
+    <div class="total-checkout-container">
+    <p class="total" id="total1">Total: 0.00</p><button class="clear-button">Clear</button>
+    </div>
+
+    <form action="OrderConfirmationPage.html">
+        <button id="checkout-button" class="checkout-button enabled" type="submit">Checkout</button>
+    </form>
+    
+
+    </div>
+    </div>
+    
+    </div>
+
+    <section class="header">
+
+        <div class="side-menu" id ="side-menu" >
+        <ul>
+        <li>Browse Products<i class="fa fa-angle-right"></i>
+        <ul>
+            
+            <li>Produce
+                <ul class="category">
+                    <li id="vegetables">Vegetables</li>
+                    <li id="fruit">Fruit</li>
+                </ul>
+            </li>
+            
+            <li>Bakery
+            <ul class="category">
+            <li id="bread">Bread</li>
+            </ul>
+            </li>
+
+            <li>Meat and Seafood
+            <ul class="category">
+            <li id="meat">Meat</li>
+            <li id="fish">Fish</li>
+            </ul>
+            </li>
+
+            <li>Dairy/Eggs
+            <ul class="category">
+            <li id="milk">Milk</li>
+            <li id="eggs">Eggs</li>
+            </ul>
+            </li>
+
+            <li>Alcohol
+            <ul class="category">
+            <li id="wine">Wine</li>
+            <li id="beer">Beer</li>
+            </ul>
+            </li>
+
+            <li>Frozen Food
+            <ul class="category">
+            <li id="readymeals">Ready-Meals</li>
+            </ul>
+            </li>
+
+            <li>Canned Goods
+            <ul class="category">
+            <li id="cannedgoods">Canned veg</li>
+            </ul>
+            </li>
+
+            <li>Grains and Pasta
+            <ul class="category">
+            <li id="pasta">Pasta</li>
+            </ul>
+            </li>
+
+            </ul>
+            </li>
+        </ul>
+        </div> 
+
+        
+    <div class="content">
+        
+        <div id="main-header" class="Merch-site-header">
+        <h2>Welcome to StreetWorms Grocer <br> </h2><h2 >Home of the freshest quality groceries</h2>
+        </div>
+      <h1 id="carousel-header">Todays Specials</h1>  
+    <div id="carousel" class="slider">
+
+        
+        <div id="slider" class="carousel slide carousel-fade">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                
+                <img src="http://localhost/WebsiteProject/GroceryImages/Milk2.jpg" class="carousel-image d-block w-100 ">
+                
+              </div>
+              <div class="carousel-item">
+                
+                <img src="http://localhost/WebsiteProject/GroceryImages/spaghetti.jpeg" class="carousel-image d-block w-100 ">
+             
+              </div>
+              <div class="carousel-item">
+              
+                <img src="http://localhost/WebsiteProject/GroceryImages/Tomatoes.jpg" class="carousel-image d-block w-100 ">
+              
+              </div>
+            </div>
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#slider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" 
+                onclick="displayPrice1()">
+                </button>
+                <button type="button" data-bs-target="#slider" data-bs-slide-to="1" aria-label="Slide 2" onclick="displayPrice2()"></button>
+                <button type="button" data-bs-target="#slider" data-bs-slide-to="2" aria-label="Slide 3" onclick="displayPrice3()"></button>
+              </div>
+          </div>
+    </div>
+    <div id="carousel-descriptions">
+    
+    <h3 class="Specials1-Merch-Page-Home" id="milk">Full Cream Milk <s>$5.00</s> $2.00</h3>
+   
+    
+    <h3 class="Specials2-Merch-Page-Home" id="pasta">Spaghetti Bolognese<s>$20.00</s> $15.00</h3>
+  
+    
+    <h3 class="Specials3-Merch-Page-Home" id="vegetables">Tomatoes <s>$6.50</s> $1.30</h3>
+   
+    </div>
+    <!--Product Category Section-->
+    <h2 id="category-header" class="category-site-header"><br></h2>
+
+        <div class="grid">
+            <div class ="grid-item" id="grid-item1">  
+                <img src="" class="grid-image" id="grid-image1">
+                <p id="item-description1" class="item-description"></p>
+                <p id="item-price1" class="item-price"></p>
+                <p id="item-availability1"></p>
+                <button class="add-to-cart-button">Add to cart</button>
+            </div>
+            
+            <div class ="grid-item" id="grid-item2">  
+                <img src="" class="grid-image"  id="grid-image2">
+                <p id="item-description2" class="item-description"></p>
+                <p id="item-price2" class="item-price"></p>
+                <p id="item-availability2"></p>
+                <button class="add-to-cart-button">Add to cart</button>
+            </div>
+
+            <div class ="grid-item" id="grid-item3">  
+                <img src="" class="grid-image" id="grid-image3">
+                <p id="item-description3" class="item-description"></p>
+                <p id="item-price3" class="item-price"></p>
+                <p id="item-availability3"></p>
+                <button class="add-to-cart-button">Add to cart</button>
+            </div>
+        </div>
+        
+    
+    </div>
+
+    </div>
+    </section>
+
+   
+    
+    <div class="spacer"></div>
+
+    <!--Bootstrap Javascript plugin file-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!--Script for hamburger menu-->
+    <script>
+        function openmenu() {
+            document.getElementById("side-menu").style.display="block";
+            document.getElementById("menu-btn").style.display="none";
+            document.getElementById("close-btn").style.display="block";
+        }
+
+        function closemenu() {
+            document.getElementById("side-menu").style.display="none";
+            document.getElementById("menu-btn").style.display="block";
+            document.getElementById("close-btn").style.display="none";
+        }
+    </script>
+
+   <!--Script for side menu expansion functionality-->
+   <script>
+        var secondLevelItems = document.querySelectorAll('.side-menu ul li ul li');
+
+        for (var i = 0; i < secondLevelItems.length; i++) {
+            secondLevelItems[i].addEventListener('click', function(event) {
+                
+                
+                var thirdLevelItems = this.querySelectorAll('ul li ul li');
+
+                for (var j = 0; j < thirdLevelItems.length; j++) {
+                    thirdLevelItems[j].style.display=(thirdLevelItems[j].style.display === 'none') ? 'block' : 'none';
+                }
+            });
+        }
+    </script>
+
+    <!--Script for specials prices in carousel-->
+    <script>
+        function displayPrice1() {
+            document.getElementsByClassName("Specials1-Merch-Page-Home")[0].style.display = "block";
+            document.getElementsByClassName("Specials2-Merch-Page-Home")[0].style.display = "none";
+            document.getElementsByClassName("Specials3-Merch-Page-Home")[0].style.display = "none";
+        }
+     
+        function displayPrice2() {
+            document.getElementsByClassName("Specials1-Merch-Page-Home")[0].style.display = "none";
+            document.getElementsByClassName("Specials2-Merch-Page-Home")[0].style.display = "block";
+            document.getElementsByClassName("Specials3-Merch-Page-Home")[0].style.display = "none";
+        }
+     
+        function displayPrice3() {
+            document.getElementsByClassName("Specials1-Merch-Page-Home")[0].style.display = "none";
+            document.getElementsByClassName("Specials2-Merch-Page-Home")[0].style.display = "none";
+            document.getElementsByClassName("Specials3-Merch-Page-Home")[0].style.display = "block";
+        }
+     </script>
+     
+    
+    <!--Script for expanding and minimising cart-->
+    <script>
+        function expandcart() {
+        if (document.getElementById("cart-expanded").style.display=="none") {
+        document.getElementById("cart-expanded").style.display="block";
+        } else {
+        document.getElementById("cart-expanded").style.display="none";    
+        }  
+        } 
+    </script>
+
+<!--Scripts for hiding carousel and loading different category page grids based on which link was clicked-->
+<script>
+function hideCarousel(event) {
+    if (event.target.closest('ul ul ul')) {
+    document.getElementById("carousel").style.display="none";
+    document.getElementById("carousel-descriptions").style.display="none";
+    document.getElementById("main-header").style.display="none";
+    document.getElementById("carousel-header").style.display="none";
+    
+    var grids = document.querySelectorAll(".grid");
+    grids.forEach(function(grid) {
+        grid.style.display = "flex";/*arranges child elements horizontally*/
+    });
+
+    var headers = document.querySelectorAll(".category-site-header");
+    headers.forEach(function(header) {
+         header.style.display = "block";
+    });
+    }
+}
+document.addEventListener("click", hideCarousel);
+</script>
+
+<script>
+    function hideCarousel(event) {
+        if (event.target.closest('#carousel-descriptions')) {
+        document.getElementById("carousel").style.display="none";
+        document.getElementById("carousel-descriptions").style.display="none";
+        document.getElementById("main-header").style.display="none";
+        document.getElementById("carousel-header").style.display="none";
+        
+        var grids = document.querySelectorAll(".grid");
+        grids.forEach(function(grid) {
+            grid.style.display = "flex";/*arranges child elements horizontally*/
+        });
+    
+        var headers = document.querySelectorAll(".category-site-header");
+        headers.forEach(function(header) {
+             header.style.display = "block";
+        });
+        }
+    }
+    document.addEventListener("click", hideCarousel);
+    </script>
+
+<!--Script for linking products and product info from the database
+and for all cart functionality-->
+<script src="Categories.js">
+</script>
+
+
+ <!--Script for changing checkout button based on if theres items in the cart-->
+<script>
+$(document).ready(function() {
+    function updateCheckoutButton() {
+        var totalAmountText = $("#total2").text();
+        var totalAmount = parseFloat(totalAmountText.replace('$', '')).toFixed(2);
+        if (totalAmount <= 0.00) {
+            console.log("Total amount:", totalAmount);
+            $("#checkout-button").removeClass("enabled").addClass("disabled");
+        } else {
+            console.log("Total amount:", totalAmount);
+            $("#checkout-button").removeClass("disabled").addClass("enabled");
+        }
+    }
+
+    // Call the function initially
+    updateCheckoutButton();
+
+    // Update the button status whenever the total amount changes
+    $(".add-to-cart-button").click(function() {
+        setTimeout(updateCheckoutButton, 50);
+    });
+    
+    $(".cart-grid").on("click", ".remove-item", function() {
+        setTimeout(updateCheckoutButton, 50);
+        console.log("Total amount:", totalAmount1);
+    });
+
+    $(".clear-button").click(function() {
+        setTimeout(updateCheckoutButton, 100);
+    });
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
